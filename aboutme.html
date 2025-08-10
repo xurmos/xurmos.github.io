@@ -1,84 +1,192 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Portfolio - Joey</title>
-    <link rel="stylesheet" href="style.css">
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap" rel="stylesheet">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Portfolio</title>
+  <style>
+    /* New color palette with blue glow */
+    :root {
+      --bg-color: #121212;
+      --card-bg: #1e1e1e;
+      --highlight-color: #dedede;
+      --text-color: rgba(222, 222, 222, 0.8);
+      --border-color: #383838;
+      --hover-glow: #87ceeb;
+      --blue-glow-color: #87ceeb;
+    }
+
+    body {
+      background-color: var(--bg-color);
+      font-family: 'Segoe UI', 'Helvetica Neue', Arial, sans-serif;
+      color: var(--text-color);
+      display: flex;
+      justify-content: center;
+      padding: 40px;
+      margin: 0;
+    }
+
+    .portfolio {
+      max-width: 900px;
+      width: 100%;
+      display: flex;
+      flex-direction: column;
+      gap: 20px;
+    }
+
+    h1 {
+      text-align: center;
+      font-size: 2.2rem;
+      color: var(--highlight-color);
+      margin-bottom: 20px;
+      font-weight: 600;
+      letter-spacing: 1px;
+    }
+
+    .card-layout {
+      display: flex;
+      flex-direction: column;
+      gap: 20px;
+    }
+
+    .top-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 20px;
+      justify-content: space-between;
+    }
+
+    .card {
+      background-color: var(--card-bg);
+      border: 1px solid var(--border-color);
+      border-radius: 12px;
+      padding: 25px;
+      transition: border-color 0.3s ease, box-shadow 0.3s ease, transform 0.2s ease;
+    }
+    
+    /* Specific styling for the top square cards */
+    .top-card {
+        flex: 1;
+        min-width: 0;
+        aspect-ratio: 1 / 1;
+    }
+
+    .card:hover {
+      border-color: var(--blue-glow-color); /* Use the new blue color on hover */
+      box-shadow: 0 0 15px var(--hover-glow);
+      transform: translateY(-3px);
+    }
+
+    /* Styling for the category names (h2) */
+    .card h2 {
+      font-size: 1.25rem;
+      margin-bottom: 15px;
+      color: var(--blue-glow-color); /* Soft blue color */
+      font-weight: 600;
+      /* The soft glow effect */
+      text-shadow: 0 0 8px rgba(135, 206, 235, 0.6);
+    }
+
+    /* Styling for the description text (p and li) */
+    .card p, .card li {
+      font-size: 0.95rem;
+      color: var(--text-color); /* Softer, slightly transparent gray */
+      font-weight: 400; /* Lighter font weight */
+      margin: 8px 0;
+      line-height: 1.4;
+    }
+
+    /* Styling for the strong tags within the paragraphs */
+    .card p strong {
+      color: var(--highlight-color);
+      font-weight: 500;
+    }
+
+    .languages {
+      display: flex;
+      flex-direction: column;
+      gap: 20px;
+    }
+
+    .languages h3 {
+      font-size: 1rem;
+      color: var(--blue-glow-color); /* Also apply blue color here */
+      text-shadow: 0 0 5px rgba(135, 206, 235, 0.4);
+      margin-bottom: 8px;
+    }
+
+    ul {
+      list-style-type: '• ';
+      padding-left: 20px;
+    }
+    
+    /* Responsive styles for smaller screens */
+    @media (max-width: 768px) {
+      body {
+        padding: 20px;
+      }
+      
+      .top-row {
+        flex-direction: column;
+      }
+
+      .card {
+        flex: 1 1 100%;
+        aspect-ratio: unset;
+      }
+    }
+  </style>
 </head>
 <body>
+  <main class="portfolio">
+    <h1>Portfolio</h1>
+    
+    <div class="card-layout">
+        <div class="top-row">
+            <div class="card top-card">
+                <h2>Personal Information</h2>
+                <p><strong>Name:</strong> Kyrie</p>
+                <p><strong>Age:</strong> 19</p>
+                <p><strong>Location:</strong> Indiana, United States</p>
+                <p><strong>Experience:</strong> 4+ days coding experience</p>
+                <p><strong>Languages:</strong> English & Japanese</p>
+            </div>
 
-    <header class="navbar">
-        <nav>
-            <ul>
-                <li><a href="#home">Home</a></li>
-                <li class="active"><a href="#portfolio">Portfolio</a></li>
-                <li><a href="#projects">Projects</a></li>
-                <li><a href="#contact">Contact</a></li>
-            </ul>
-        </nav>
-    </header>
-
-    <main class="container">
-        <section class="portfolio-card">
-            <h1>Portfolio</h1>
-
-            <div class="card-section">
-                <div class="card-column">
-                    <h2>Personal Information</h2>
-                    <ul>
-                        <li><span class="label">Name:</span> Joey</li>
-                        <li><span class="label">Age:</span> 20 (25/1/2004)</li>
-                        <li><span class="label">Location:</span> London, United Kingdom</li>
-                        <li><span class="label">Experience:</span> 7+ years coding experience</li>
-                        <li><span class="label">Languages:</span> English, Russian and Swedish</li>
-                    </ul>
-                </div>
-                <div class="card-column">
-                    <h2>Programming Languages</h2>
-                    <div class="programming-languages">
-                        <div class="languages-group">
-                            <h3>Frontend</h3>
-                            <ul>
-                                <li>HTML/CSS/JavaScript</li>
-                                <li>TypeScript</li>
-                                <li>Tailwind CSS</li>
-                                <li>React</li>
-                                <li>Next.js</li>
-                                <li>Bootstrap</li>
-                            </ul>
-                        </div>
-                        <div class="languages-group">
-                            <h3>Backend</h3>
-                            <ul>
-                                <li>Rust</li>
-                                <li>C++</li>
-                                <li>C#</li>
-                                <li>Python</li>
-                                <li>Go</li>
-                                <li>Node.js</li>
-                            </ul>
-                        </div>
+            <div class="card top-card">
+                <h2>Programming Languages</h2>
+                <div class="languages">
+                    <div>
+                        <h3>Frontend</h3>
+                        <ul>
+                            <li>HTML</li>
+                            <li>CSS</li>
+                            <li>JavaScript</li>
+                        </ul>
+                    </div>
+                    <div>
+                        <h3>Backend</h3>
+                        <ul>
+                            <li>Node.js</li>
+                        </ul>
                     </div>
                 </div>
             </div>
-            
-            <div class="card-section">
-                <h2>Hobbies & Interests</h2>
-                <ul>
-                    <li>Web and software development</li>
-                    <li>PC Build & Repairs</li>
-                    <li>Fashion designing</li>
-                    <li>Audio monitoring & music</li>
-                    <li>Traveling abroad</li>
-                </ul>
-            </div>
-        </section>
-    </main>
+        </div>
 
-    <script src="script.js"></script>
+        <div class="card">
+            <h2>Hobbies & Interests</h2>
+            <ul>
+                <li>Web and software development</li>
+                <li>PC Build & Repairs</li>
+                <li>Music Enthusiast</li>
+                <li>Traveling abroad</li>
+            </ul>
+        </div>
+    </div>
+  </main>
+
+  <script>
+    console.log("Portfolio page loaded with glowing hover effects");
+  </script>
 </body>
 </html>

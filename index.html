@@ -38,10 +38,43 @@ body {
     min-height: 100vh;
     overflow: hidden;
 }
+
+/* New CSS for the audio overlay */
+.audio-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: #000; /* Solid black background to hide the content completely */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    z-index: 100; /* Make sure it's on top of everything */
+    opacity: 1;
+    transition: opacity 1s ease-in-out; /* Smooth transition for fading out */
+    cursor: pointer;
+}
+
+.audio-overlay.hidden {
+    opacity: 0;
+    visibility: hidden;
+    pointer-events: none; /* Prevents clicks on the hidden overlay */
+}
+
+.audio-overlay p {
+    font-size: 5rem; /* Make the heart emoji large */
+    color: var(--text-color-light);
+    text-shadow: 0 0 10px var(--glow-color); /* Glow effect for the text */
+    font-weight: 600;
+    pointer-events: none; /* Prevents text from blocking clicks on the overlay */
+}
+
+/* Custom cursor */
 * {
     cursor: url("cursor.ico"), auto !important;
 }
-
 
 .background-container {
     position: absolute;
@@ -64,7 +97,12 @@ body {
     padding: 40px;
     gap: 60px;
     box-shadow: 0 5px 15px rgba(0, 0, 0, 0.5); /* Subtle shadow initially */
-    transition: transform 0.3s ease, box-shadow 0.3s ease; /* Smooth transition */
+    transition: transform 0.3s ease, box-shadow 0.3s ease, opacity 1s ease-in-out; /* Add opacity to transition */
+    opacity: 0; /* Initially hidden */
+}
+
+.profile-card.visible {
+    opacity: 1; /* Fade in when this class is added */
 }
 
 .profile-card:hover {
@@ -218,7 +256,6 @@ body {
 /* Responsive CSS for Mobile */
 @media (max-width: 768px) {
     body {
-        /* Add some padding to body to prevent card from touching screen edges */
         padding: 20px;
     }
 
@@ -301,16 +338,19 @@ body {
     </style>
 </head>
 <body>
+    <div class="audio-overlay" id="audio-overlay">
+        <p>🖤</p>
+    </div>
 
     <div class="background-container"></div>
 
-    <div class="profile-card">
+    <div class="profile-card" id="profile-card">
         <div class="left-panel">
             <nav class="main-nav">
                 <ul>
-                    <li><a href="aboutme.html">About</a></li>
-                    <li><a href="myprojects.html">Projects</a></li>
-                    <li><a href="mailto:tarelltrogden@yahoo.com">Contact</a></li>
+                    <li><a href="aboutme.html" target="_blank" rel="noopener noreferrer">About</a></li>
+                    <li><a href="myprojects.html" target="_blank" rel="noopener noreferrer">Projects</a></li>
+                    <li><a href="mailto:tarelltrogden@yahoo.com" target="_blank" rel="noopener noreferrer">Contact</a></li>
                 </ul>
             </nav>
             <div class="social-links">
@@ -341,9 +381,11 @@ body {
             </div>
         </div>
     </div>
+    
     <audio id="myAudio" loop>
         <source src="audio-file.mp3" type="audio/mpeg">
     </audio>
+
     <script>
         // JavaScript starts here
 
@@ -400,25 +442,22 @@ body {
             function typeWriter() {
                 const currentSentence = sentences[sentenceIndex];
                 
-                // Determine if we are typing or deleting
                 if (!isDeleting && charIndex <= currentSentence.length) {
-                    // Typing
                     typewriterTextElement.textContent = currentSentence.substring(0, charIndex++);
                     if (charIndex > currentSentence.length) {
                         isDeleting = true;
-                        charIndex--; // To correctly start deleting from the last character
+                        charIndex--;
                         setTimeout(typeWriter, pauseAtEnd);
-                        return; // Stop the current function call and wait for the timeout
+                        return;
                     }
                     setTimeout(typeWriter, typingSpeed);
                 } else if (isDeleting && charIndex >= 0) {
-                    // Deleting
                     typewriterTextElement.textContent = currentSentence.substring(0, charIndex--);
                     if (charIndex < 0) {
                         isDeleting = false;
                         sentenceIndex = (sentenceIndex + 1) % sentences.length;
                         setTimeout(typeWriter, pauseBetweenSentences);
-                        return; // Stop the current function call and wait for the timeout
+                        return;
                     }
                     setTimeout(typeWriter, eraseSpeed);
                 }
@@ -427,19 +466,24 @@ body {
             typeWriter();
         });
 
-        // Audio autoplay handling
-        window.addEventListener('load', () => {
-            const audio = document.getElementById('myAudio');
+        // New Audio Autoplay and Overlay Logic
+        const audioOverlay = document.getElementById('audio-overlay');
+        const audio = document.getElementById('myAudio');
+        const profileCard = document.getElementById('profile-card');
+
+        audioOverlay.addEventListener('click', () => {
+            // Hide the overlay
+            audioOverlay.classList.add('hidden');
+
+            // Make the profile card visible
+            profileCard.classList.add('visible');
+
+            // Play the audio
             audio.volume = 0.3;
             audio.loop = true;
-
-            audio.play().catch(() => {
-                // If autoplay is blocked, wait for first user click/tap
-                document.addEventListener('click', () => {
-                    audio.play();
-                }, { once: true });
-            });
+            audio.play();
         });
+        
         // JavaScript ends here
     </script>
 </body>
