@@ -1,109 +1,364 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <title>´ཀ`</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title> Kyrie - About Me </title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
     <style>
-        body {
-            font-family: Arial, sans-serif;
-            background: #f7f7f700;
-            margin: 0;
-            padding: 0;
-            display: flex;
-            justify-content: center;
-            min-height: 100vh;
-            align-items: center;
-        }
+/* CSS starts here */
 
-        .bio-container {
-            background: rgba(255, 255, 255, 0.13);
-            padding: 30px 25px;
-            border-radius: 16px;
-            box-shadow: 0 4px 20px rgba(0, 0, 0, 0);
-            max-width: 350px;
-            width: 100%;
-            text-align: center;
-        }
+/* Universal Styles & Fonts */
+:root {
+    --text-color-light: #f0f0f0;
+    --text-color-primary: #87ceeb; /* A light blue for contrast */
+    --background-color-dark: #1a1a1a00;
+    --panel-background: rgba(0, 0, 0, 0.4); /* Semi-transparent black */
+    --border-radius: 15px;
+    --font-poppins: 'Poppins', sans-serif;
+    --glow-color: #87ceeb; /* The blue glow color */
+}
 
-        .avatar {
-            width: 100px;
-            height: 100px;
-            border-radius: 50%;
-            object-fit: cover;
-            border: 3px solid #4f8cff;
-            margin-bottom: 15px;
-        }
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
 
-        .name {
-            font-size: 1.8em;
-            font-weight: bold;
-            margin-bottom: 6px;
-        }
+body {
+    font-family: var(--font-poppins);
+    color: var(--text-color-light);
+    background-color: var(--background-color-dark);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    overflow: hidden;
+}
+* {
+    cursor: url("cursor.ico"), auto !important;
+}
 
-        .bio {
-            color: #90d7f8;
-            margin-bottom: 20px;
-        }
 
-        .links {
-            display: flex;
-            flex-direction: column;
-            gap: 12px;
-        }
+.background-container {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: -1;
+    background-image: url('images/cowboy.jpg');
+    background-size: cover;
+    background-position: center;
+}
 
-        .links a {
-            text-decoration: none;
-            background: #4f8cff;
-            color: white;
-            padding: 12px;
-            border-radius: 8px;
-            font-weight: 600;
-            transition: background 0.25s;
-        }
+.profile-card {
+    display: flex;
+    max-width: 900px;
+    width: 100%;
+    background: var(--panel-background);
+    border-radius: var(--border-radius);
+    padding: 40px;
+    gap: 60px;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.5); /* Subtle shadow initially */
+    transition: transform 0.3s ease, box-shadow 0.3s ease; /* Smooth transition */
+}
 
-        .links a:hover {
-            background: #4f8cff;
-        }
+.profile-card:hover {
+    transform: translateY(-10px); /* Lift up */
+    box-shadow: 0 10px 20px var(--glow-color); /* Light blue highlight shadow */
+}
+
+/* Left Panel - Navigation & Socials */
+.left-panel {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: flex-start;
+    padding-right: 40px;
+    border-right: 2px solid rgba(255, 255, 255, 0.1);
+}
+
+.main-nav ul {
+    list-style: none;
+}
+
+.main-nav li {
+    margin-bottom: 20px;
+}
+
+.main-nav a {
+    color: var(--text-color-light);
+    font-size: 24px;
+    text-decoration: none;
+    font-weight: 600;
+    transition: color 0.3s ease;
+}
+
+.main-nav a:hover {
+    color: var(--text-color-primary);
+}
+
+.social-links {
+    display: flex;
+    gap: 15px;
+    margin-top: auto;
+}
+
+.social-links a {
+    color: var(--text-color-light);
+    font-size: 24px;
+    transition: color 0.3s ease;
+}
+
+.social-links a:hover {
+    color: var(--text-color-primary);
+}
+
+.email-link a {
+    color: var(--text-color-light);
+    text-decoration: none;
+    font-size: 16px;
+    margin-top: 20px;
+    display: block;
+    text-transform: lowercase;
+}
+
+/* Right Panel - Profile Info & Stats */
+.right-panel {
+    flex-grow: 1;
+    display: flex;
+    flex-direction: column;
+}
+
+.profile-header {
+    display: flex;
+    align-items: center;
+    gap: 30px;
+    margin-bottom: 30px;
+}
+
+.profile-pic {
+    width: 150px;
+    height: 150px;
+    border-radius: 50%;
+    border: 3px solid var(--text-color-primary);
+    object-fit: cover;
+}
+
+.user-info {
+    display: flex;
+    flex-direction: column;
+}
+
+.username {
+    font-size: 48px;
+    font-weight: 600;
+    color: var(--text-color-primary);
+    line-height: 1;
+}
+
+.user-title {
+    font-size: 18px;
+    color: var(--text-color-light);
+    margin-top: 5px;
+}
+
+/* New CSS for the typewriter effect */
+.user-title::after {
+    content: '|';
+    animation: blink-caret .75s step-end infinite;
+}
+
+@keyframes blink-caret {
+    from, to { border-color: transparent }
+    50% { border-color: var(--text-color-light) }
+}
+
+/* Stats Section */
+.stats-row {
+    display: flex;
+    gap: 20px;
+    margin-top: 20px;
+}
+
+.stat-item {
+    background-color: rgba(255, 255, 255, 0.05);
+    padding: 15px 20px;
+    border-radius: 10px;
+    display: flex;
+    flex-direction: column;
+}
+
+.stat-item:first-child {
+    flex-grow: 1;
+}
+
+.stat-item:last-child {
+    flex-grow: 0;
+    white-space: nowrap;
+    align-items: center;
+}
+
+.stat-label {
+    font-size: 14px;
+    color: rgba(255, 255, 255, 0.7);
+    margin-bottom: 5px;
+}
+
+.stat-value {
+    font-size: 24px;
+    font-weight: 600;
+    color: var(--text-color-primary);
+}
+
+/* CSS ends here */
     </style>
 </head>
-
 <body>
 
-    <div class="bio-container">
-        <img src="images\a5981efc65fe274f5a0a26c3896108b.jpg" alt="Avatar" class="avatar" />
-        <div class="name" id="name">Kyrie Trogden</div>
-        <div class="bio" id="bio">This is a short bio or description about you.</div>
-        <div class="links" id="links">
-            <a href="https://www.discord.com/users/1238327432709410899" target="_blank">Discord</a>
-            <a href="https://www.github.com/xurmos" target="_blank">GitHub</a>
+    <div class="background-container"></div>
+
+    <div class="profile-card">
+        <div class="left-panel">
+            <nav class="main-nav">
+                <ul>
+                    <li><a href="aboutme.html">About</a></li>
+                    <li><a href="myprojects.html">Projects</a></li>
+                    <li><a href="mailto:tarelltrogden@yahoo.com">Contact</a></li>
+                </ul>
+            </nav>
+            <div class="social-links">
+                <a href="https://discordapp.com/users/1238327432709410899" target="_blank"><i class="fab fa-discord"></i></a>
+                <a href="https://www.github.com/xurmos" target="_blank"><i class="fab fa-github"></i></a>
+                <a href="https://steamcommunity.com/id/xurmos" target="_blank"><i class="fab fa-steam"></i></a>
+                <a href="https://www.tiktok.com/@xurmosa" target="_blank"><i class="fab fa-tiktok"></i></a>
+                <a href="https://www.last.fm/user/soulvrt" target="_blank"><i class="fab fa-lastfm"></i></a>
+            </div>
+        </div>
+
+        <div class="right-panel">
+            <div class="profile-header">
+                <img src="images/a5981efc65fe274f5a0a26c3896108b.jpg" alt="Profile Picture" class="profile-pic">
+                <div class="user-info">
+                    <h1 class="username">Kyrie</h1>
+                    <p class="user-title"><span id="typewriter-text"></span></p>
+                </div>
+            </div>
+            <div class="stats-row">
+                <div class="stat-item">
+                    <p class="stat-label" id="time-spent">you have spent 0m 0s on my website.</p>
+                </div>
+                <div class="stat-item">
+                    <p class="stat-label">profile views</p>
+                    <div class="stat-value" id="profile-views">0</div>
+                </div>
+            </div>
         </div>
     </div>
-    <style>
-        body {
-            margin: 0;
-            padding: 0;
-            height: 100vh;
-            background-image: url("images/ilovepussy.gif");
-            background-size: cover;
-            background-repeat: no-repeat;
-            background-position: center;
-        }
-    </style>
-    <style>
-        @import url('https://fonts.googleapis.com/css2?family=Lavishly+Yours&family=Monsieur+La+Doulaise&display=swap');
-    </style>
+    <audio id="myAudio" loop>
+        <source src="audio-file.mp3" type="audio/mpeg">
+    </audio>
     <script>
+        // JavaScript starts here
 
-        const nameEl = document.getElementById('name');
-        const bioEl = document.getElementById('bio');
-        const linksEl = document.getElementById('links');
+        document.addEventListener('DOMContentLoaded', () => {
 
-        nameEl.textContent = "Kyrie";
-        bioEl.textContent = "A Upcoming Full-Stack DEV.";
+            // 1. Time spent on website functionality
+            const timeSpentElement = document.getElementById('time-spent');
+            let seconds = 0;
+            let minutes = 0;
+
+            function updateTimeSpent() {
+                seconds++;
+                if (seconds >= 60) {
+                    minutes++;
+                    seconds = 0;
+                }
+
+                const formattedSeconds = seconds < 10 ? `0${seconds}` : seconds;
+                const formattedMinutes = minutes < 10 ? `0${minutes}` : minutes;
+
+                timeSpentElement.textContent = `you have spent ${formattedMinutes}m ${formattedSeconds}s on my website.`;
+            }
+
+            // Update the time every second
+            setInterval(updateTimeSpent, 1000);
+
+            // 2. Profile views functionality
+            const profileViewsElement = document.getElementById('profile-views');
+            const initialViews = 0; // Initial view count
+            
+            function updateProfileViews() {
+                profileViewsElement.textContent = (initialViews + 1).toLocaleString();
+            }
+
+            updateProfileViews();
+
+            // 3. Typewriter Effect for the user title
+            const sentences = [
+                "Welcome to my page!",
+                "Nineteen years old.",
+                "I love coding and design.",
+                "Full-Stack Web Developer.",
+            ];
+
+            const typewriterTextElement = document.getElementById('typewriter-text');
+            let sentenceIndex = 0;
+            let charIndex = 0;
+            let isDeleting = false;
+            let typingSpeed = 100;
+            let eraseSpeed = 50;
+            let pauseAtEnd = 1500; // Pause for 1.5 seconds at the end of a sentence
+            let pauseBetweenSentences = 500; // Pause for 0.5 seconds before typing the next sentence
+
+            function typeWriter() {
+                const currentSentence = sentences[sentenceIndex];
+                
+                // Determine if we are typing or deleting
+                if (!isDeleting && charIndex <= currentSentence.length) {
+                    // Typing
+                    typewriterTextElement.textContent = currentSentence.substring(0, charIndex++);
+                    if (charIndex > currentSentence.length) {
+                        isDeleting = true;
+                        charIndex--; // To correctly start deleting from the last character
+                        setTimeout(typeWriter, pauseAtEnd);
+                        return; // Stop the current function call and wait for the timeout
+                    }
+                    setTimeout(typeWriter, typingSpeed);
+                } else if (isDeleting && charIndex >= 0) {
+                    // Deleting
+                    typewriterTextElement.textContent = currentSentence.substring(0, charIndex--);
+                    if (charIndex < 0) {
+                        isDeleting = false;
+                        sentenceIndex = (sentenceIndex + 1) % sentences.length;
+                        setTimeout(typeWriter, pauseBetweenSentences);
+                        return; // Stop the current function call and wait for the timeout
+                    }
+                    setTimeout(typeWriter, eraseSpeed);
+                }
+            }
+
+            typeWriter();
+        });
+
+        // Audio autoplay handling
+        window.addEventListener('load', () => {
+            const audio = document.getElementById('myAudio');
+            audio.volume = 0.3;
+            audio.loop = true;
+
+            audio.play().catch(() => {
+                // If autoplay is blocked, wait for first user click/tap
+                document.addEventListener('click', () => {
+                    audio.play();
+                }, { once: true });
+            });
+        });
+        // JavaScript ends here
     </script>
-
 </body>
-
 </html>
